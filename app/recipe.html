@@ -36,7 +36,7 @@
 </script>
 <script>
     var recipeTemplate = Hogan.compile($("#recipeTemplate").html());
-    $.getJSON("./chicken-skewers.json", function (data) {
+    $.getJSON("//recipe-cms-server.herokuapp.com/recipes/chicken-skewers", function (data) {
         $("title").text(data.name);
         $("body").html(recipeTemplate.render(data));
     });
