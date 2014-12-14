@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Recipe</title>
+</head>
+<body>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/hogan.js/3.0.2/hogan.js"></script>
+
+<script type="text/html" id="recipeTemplate">
+    <h1>{{name}}</h1>
+    <h2>Serving: <span>{{serving}}</span></h2>
+    <h3>Ingredients</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Ingredient</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        {{#ingredients}}
+        <tr>
+            <td>{{name}}</td>
+            <td>{{quantity}}</td>
+        </tr>
+        {{/ingredients}}
+    </table>
+    <h3>Method</h3>
+    <ol>
+        {{#method}}
+        <li>{{.}}</li>
+        {{/method}}
+    </ol>
+</script>
+<script>
+    var recipeTemplate = Hogan.compile($("#recipeTemplate").html());
+    $.getJSON("./chicken-skewers.json", function (data) {
+        $("title").text(data.name);
+        $("body").html(recipeTemplate.render(data));
+    });
+</script>
+
+</body>
+</html>
